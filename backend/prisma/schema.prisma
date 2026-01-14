@@ -19,3 +19,26 @@ model User {
   username    String  @unique
   password    String   
 }
+
+model merchant {
+  id          String  @id  @default(uuid())
+  name        String
+  username    String  @unique
+  password    String   
+}
+
+model userAccount{
+  id        String @id @default(uuid())
+  balance   Int    @default(0)
+  locked    Int    @default(0)
+  userId    String @unique
+  user      User @relation(fields: [userId],references: [id])
+}
+
+model merchantAccount{
+  id        String @id @default(uuid())
+  balance   Int   @default(0)
+  locked   Int    @default(0)
+  merchantId    String @unique
+  merchant      User @relation(fields: [merchantId],references: [id])
+}
